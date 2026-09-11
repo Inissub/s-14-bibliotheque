@@ -1,5 +1,4 @@
 const pool = require('../config/database')
-// fichier pour le crud dans la table auteurs
 
 async function tousAuteurs(req, res){
     try{

@@ -7,4 +7,6 @@ router.get('/', tousAuteurs);
 router.post('/', newAuteur);
 router.put('/:id', updateAuteur);
 router.delete('/:id', deleteAuteur);
+
+
 module.exports = router;
