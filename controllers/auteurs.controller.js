@@ -18,7 +18,7 @@ async function newAuteur(req, res){
         const result = await pool.query('INSERT INTO biblio.auteurs (nom, nationalite) VALUES ($1,$2) RETURNING *', 
             [nom, nationalite]
         );
-        res.status(200).json({success: 'auteur créé avec succes',  auteur: result.rows[0]})
+        res.status(201).json({success: 'auteur créé avec succes',  auteur: result.rows[0]})
     }catch(err){
         res.status(500).json({error: "erreur lors de l'insertion de cet auteur"});
     }
@@ -32,7 +32,7 @@ async function updateAuteur(req, res) {
     }
     try {
         const result = await pool.query('UPDATE biblio.auteurs SET nom = $1, nationalite = $2 WHERE id = $3 RETURNING *', [nom, nationalite, id]);
-        res.status(200).json({
+        res.status(201).json({
             success: 'auteur mis à jour avec succes',
             auteur: result.rows[0]
         })
