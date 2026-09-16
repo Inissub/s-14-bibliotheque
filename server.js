@@ -10,6 +10,8 @@ app.use(express.json());
 app.use('/auteurs', require('./routes/auteurs.routes'));
 app.use('/adherents', require('./routes/adherents.routes'));
 app.use('/livres', require('./routes/livres.routes'));
+app.use('/emprunts', require('./routes/emprunts.routes'));
+
 app.get('/', async (req, res) => {
     res.send('Hello Moto')
 });
