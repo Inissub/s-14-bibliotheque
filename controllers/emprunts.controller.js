@@ -33,6 +33,7 @@ async function creerEmprunt(req, res) {
         if(error.code === '23505'){
             return res.status(409).json({ error: 'cet adherent a deja un emprunt actif sur ce livre' });
         }
+        console.error(error);
         res.status(500).json({ error: "erreur lors de la création de l'emprunt" });
     }finally{
         client.release();
@@ -59,12 +60,35 @@ async function updateEmprunt(req, res) {
         res.status(200).json({ success: 'retour enregistré avec succès', emprunt: reslut2.rows[0] });
     } catch (error) {
         await client.query('ROLLBACK');
+        console.error(error);
         res.status(500).json({ error: "erreur lors de l'enregistrement du retour" });
     }finally{
         client.release();
     }
 }
+
+async function tousEmprunts(req, res) {
+    try {
+        const result = await pool.query(`SELECT e.id, e.livre_id, l.titre, e.adherent_id, a.nom, a.prenom,
+                                            e.date_emprunt, e.date_retour_prevue, e.date_retour_effective,
+                                            CASE 
+                                                WHEN e.date_retour_effective IS NOT NULL THEN 'rendu'
+                                                WHEN e.date_retour_prevue < CURRENT_DATE THEN 'en_retard'
+                                                ELSE 'en_cours'
+                                            END AS statut
+                                            FROM biblio.emprunts e
+                                            JOIN biblio.adherents a ON a.id = e.adherent_id
+                                            JOIN biblio.livres l ON l.id = e.livre_id
+                                            ORDER BY e.date_emprunt DESC`);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "erreur lors de la recuperation de la liste" });      
+    }
+}
+
 module.exports = {
     creerEmprunt,
     updateEmprunt,
+    tousEmprunts,
 }

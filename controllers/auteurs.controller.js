@@ -4,7 +4,8 @@ async function tousAuteurs(req, res){
     try{
         const result = await pool.query('SELECT * FROM biblio.auteurs ORDER BY id ');
         res.json(result.rows);        
-    }catch(err){
+    }catch(error){
+        console.error(error);
         res.status(500).json({error: "erreur lors de la recuperation des auteurs"});
     }
 }
@@ -36,7 +37,8 @@ async function updateAuteur(req, res) {
             success: 'auteur mis à jour avec succes',
             auteur: result.rows[0]
         })
-    } catch (err) {
+    } catch (error) {
+        console.error(error);
         res.status(500).json({error: "erreur lors de la mise à jour de cet auteur"});
     }
 }
@@ -46,7 +48,8 @@ async function deleteAuteur(req, res){
     try {
         const result = await pool.query('DELETE FROM biblio.auteurs WHERE id = $1', [id])
         res.status(200).json({success: 'auteur supprimé avec succes'})
-    } catch (err) {
+    } catch (error) {
+        console.error(error);
         res.status(500).json({error: "erreur lors de la supression de cet auteur"});
     }
 }
