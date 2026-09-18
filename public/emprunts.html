@@ -6,10 +6,24 @@
     <title>Document</title>
 </head>
 <body>
+    <form name="form_emprunt" id="form_emprunt">
+        <label for="adherent_id">Adhérent</label>
+        <select name="adherent_id" id="adherent_id" required>
+        </select>
+
+        <label for="livre_id">Livres disponibles</label>
+        <select name="livre_id" id="livre_id" required>
+        </select>
+
+        <label for="date_retour_prevue">Date de retour prévue</label>
+        <input type="date" name="date_retour_prevue" id="date_retour_prevue" required>
+
+        <button type="submit">Enregistrer</button>
+        <p class="erreur" id="erreur_emprunt"></p>
+    </form>
     <table id="emp_table">
         <thead>
             <tr>
-                <th>No</th>
                 <th>Livre conserné</th>
                 <th>Nom adherent </th>
                 <th>Prenom adherent</th>
@@ -20,7 +34,6 @@
             </tr>
         </thead>
         <tbody id="emp_tbody">
-            
         </tbody>
     </table>
 

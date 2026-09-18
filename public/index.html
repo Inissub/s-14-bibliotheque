@@ -8,9 +8,79 @@
 </head>
 <body>
     <section id="stats">
-        
     </section>
 
+    <h2>Ajouter un auteur</h2>
+    <form name="form_auteur" id="form_auteur">
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" id="nom" required>
+
+        <label for="nationalite">Nationalité</label>
+        <input type="text" name="nationalite" id="nationalite">
+
+        <button type="submit">Enregistrer</button>
+        <p class="erreur" id="erreur_auteur"></p>
+    </form>
+
+    <h2>Ajouter un adhérent</h2>
+    <form name="form_adherent" id="form_adherent">
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" id="nom" required>
+
+        <label for="prenom">Prénom</label>
+        <input type="text" name="prenom" id="prenom" required>
+
+        <label for="contact">Contact</label>
+        <input type="text" name="contact" id="contact" required>
+
+        <button type="submit">Enregistrer</button>
+        <p class="erreur" id="erreur_adherent"></p>
+    </form>
+
+
+    <h2>Ajouter un livre</h2>
+    <form name="form_livre" id="form_livre">
+        <label for="titre">Titre</label>
+        <input type="text" name="titre" id="titre" required>
+
+        <label for="annee_publication">Année de publication</label>
+        <input type="number" name="annee_publication" id="annee_publication">
+
+        <label for="exemplaires_total">Nombre d'exemplaires</label>
+        <input type="number" name="exemplaires_total" id="exemplaires_total" min="1" max="4" required>
+
+        <label for="auteurs">Auteur(s) ( apuyez Ctrl+clic) pour en choisir plusieurs</label>
+        <select name="auteurs" id="auteurs" multiple required>
+        </select>
+
+        <button type="submit">Enregistrer</button>
+        <p class="erreur" id="erreur_livre"></p>
+    </form>
+
+
+    <h2>Enregistrer un emprunt</h2>
+    <form name="form_emprunt" id="form_emprunt">
+        <label for="adherent_id">Adhérent</label>
+        <select name="adherent_id" id="adherent_id" required>
+        </select>
+
+        <label for="livre_id">Livres disponibles</label>
+        <select name="livre_id" id="livre_id" required>
+        </select>
+
+        <label for="date_retour_prevue">Date de retour prévue</label>
+        <input type="date" name="date_retour_prevue" id="date_retour_prevue" required>
+
+        <button type="submit">Enregistrer</button>
+        <p class="erreur" id="erreur_emprunt"></p>
+    </form>
+
+
+
     <script src="./js/stats.js"></script>
+    <script src="./js/auteurs.js"></script>
+    <script src="./js/adhrents.js"></script>
+    <script src="./js/livres.js"></script>
+    <script src="./js/emprunts.js"></script>
 </body>
 </html>
