@@ -114,5 +114,6 @@ async function deleteLivre(req, res) {
 module.exports = {
     tousLivres,
     creerLivre,
-    updateLivre
+    updateLivre,
+    deleteLivre
 }
