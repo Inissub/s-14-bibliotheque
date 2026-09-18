@@ -1,81 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>acceuil</title>
+    <title>Accueil</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <section id="stats">
-    </section>
+    <header class="sidebar">
+        <div class="brand">
+            <span class="brand-logo">
+                <svg viewBox="0 0 24 24" ><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></svg>
+            </span>
+            <span class="brand-name">Biblio</span>
+        </div>
 
-    <h2>Ajouter un auteur</h2>
-    <form name="form_auteur" id="form_auteur">
-        <label for="nom">Nom</label>
-        <input type="text" name="nom" id="nom" required>
+        <nav aria-label="Navigation principale">
+            <ul>
+                <li>
+                    <a href="/" >
+                        <svg viewBox="0 0 24 24" ><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a href="./auteurs.html">
+                        <svg viewBox="0 0 24 24" ><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg>
+                        Auteurs
+                    </a>
+                </li>
+                <li>
+                    <a href="./livres.html">
+                        <svg viewBox="0 0 24 24" ><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+                        Livres
+                    </a>
+                </li>
+                <li>
+                    <a href="./adherents.html">
+                        <svg viewBox="0 0 24 24" ><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        Adhérents
+                    </a>
+                </li>
+                <li>
+                    <a href="./emprunts.html">
+                        <svg viewBox="0 0 24 24" ><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
+                        Emprunts
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-        <label for="nationalite">Nationalité</label>
-        <input type="text" name="nationalite" id="nationalite">
+    <main>
+        <div class="page-header">
+            <h1>Accueil</h1>
+        </div>
 
-        <button type="submit">Enregistrer</button>
-        <p class="erreur" id="erreur_auteur"></p>
-    </form>
+        <section id="stats" >
+        </section>
 
-    <h2>Ajouter un adhérent</h2>
-    <form name="form_adherent" id="form_adherent">
-        <label for="nom">Nom</label>
-        <input type="text" name="nom" id="nom" required>
+        <div class="forms">
+            <section class="card">
+                <div class="card-header">
+                    <h2>Ajouter un auteur</h2>
+                    <p>Renseignez le nom et la nationalité de l'auteur.</p>
+                </div>
+                <form name="form_auteur" id="form_auteur" class="card-content">
+                    <div class="field">
+                        <label for="nom">Nom</label>
+                        <input type="text" name="nom" id="nom" required>
+                    </div>
 
-        <label for="prenom">Prénom</label>
-        <input type="text" name="prenom" id="prenom" required>
+                    <div class="field">
+                        <label for="nationalite">Nationalité</label>
+                        <input type="text" name="nationalite" id="nationalite">
+                    </div>
 
-        <label for="contact">Contact</label>
-        <input type="text" name="contact" id="contact" required>
+                    <button type="submit">Enregistrer</button>
+                    <p class="erreur" id="erreur_auteur"></p>
+                </form>
+            </section>
 
-        <button type="submit">Enregistrer</button>
-        <p class="erreur" id="erreur_adherent"></p>
-    </form>
+            <section class="card">
+                <div class="card-header">
+                    <h2>Ajouter un adhérent</h2>
+                    <p>Créez la fiche d'une personne inscrite à la bibliothèque.</p>
+                </div>
+                <form name="form_adherent" id="form_adherent" class="card-content">
+                    <div class="row">
+                        <div class="field">
+                            <label for="nom">Nom</label>
+                            <input type="text" name="nom" id="nom" required>
+                        </div>
 
+                        <div class="field">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" name="prenom" id="prenom" required>
+                        </div>
+                    </div>
 
-    <h2>Ajouter un livre</h2>
-    <form name="form_livre" id="form_livre">
-        <label for="titre">Titre</label>
-        <input type="text" name="titre" id="titre" required>
+                    <div class="field">
+                        <label for="contact">Contact</label>
+                        <input type="text" name="contact" id="contact" required>
+                    </div>
 
-        <label for="annee_publication">Année de publication</label>
-        <input type="number" name="annee_publication" id="annee_publication">
+                    <button type="submit">Enregistrer</button>
+                    <p class="erreur" id="erreur_adherent"></p>
+                </form>
+            </section>
 
-        <label for="exemplaires_total">Nombre d'exemplaires</label>
-        <input type="number" name="exemplaires_total" id="exemplaires_total" min="1" max="4" required>
+            <section class="card">
+                <div class="card-header">
+                    <h2>Ajouter un livre</h2>
+                    <p>Associez le livre à un ou plusieurs auteurs.</p>
+                </div>
+                <form name="form_livre" id="form_livre" class="card-content">
+                    <div class="field">
+                        <label for="titre">Titre</label>
+                        <input type="text" name="titre" id="titre" required>
+                    </div>
 
-        <label for="auteurs">Auteur(s) ( apuyez Ctrl+clic) pour en choisir plusieurs</label>
-        <select name="auteurs" id="auteurs" multiple required>
-        </select>
+                    <div class="row">
+                        <div class="field">
+                            <label for="annee_publication">Année de publication</label>
+                            <input type="number" name="annee_publication" id="annee_publication">
+                        </div>
 
-        <button type="submit">Enregistrer</button>
-        <p class="erreur" id="erreur_livre"></p>
-    </form>
+                        <div class="field">
+                            <label for="exemplaires_total">Nombre d'exemplaires</label>
+                            <input type="number" name="exemplaires_total" id="exemplaires_total" min="1" max="4" required>
+                        </div>
+                    </div>
 
+                    <div class="field">
+                        <label for="auteurs">Auteur(s)</label>
+                        <select name="auteurs" id="auteurs" multiple required>
+                        </select>
+                        <p class="hint">Ctrl + clic pour en sélectionner plusieurs.</p>
+                    </div>
 
-    <h2>Enregistrer un emprunt</h2>
-    <form name="form_emprunt" id="form_emprunt">
-        <label for="adherent_id">Adhérent</label>
-        <select name="adherent_id" id="adherent_id" required>
-        </select>
+                    <button type="submit">Enregistrer</button>
+                    <p class="erreur" id="erreur_livre"></p>
+                </form>
+            </section>
 
-        <label for="livre_id">Livres disponibles</label>
-        <select name="livre_id" id="livre_id" required>
-        </select>
+            <section class="card">
+                <div class="card-header">
+                    <h2>Enregistrer un emprunt</h2>
+                    <p>Choisissez l'adhérent, le livre et la date de retour.</p>
+                </div>
+                <form name="form_emprunt" id="form_emprunt" class="card-content">
+                    <div class="field">
+                        <label for="adherent_id">Adhérent</label>
+                        <select name="adherent_id" id="adherent_id" required>
+                        </select>
+                    </div>
 
-        <label for="date_retour_prevue">Date de retour prévue</label>
-        <input type="date" name="date_retour_prevue" id="date_retour_prevue" required>
+                    <div class="field">
+                        <label for="livre_id">Livres disponibles</label>
+                        <select name="livre_id" id="livre_id" required>
+                        </select>
+                    </div>
 
-        <button type="submit">Enregistrer</button>
-        <p class="erreur" id="erreur_emprunt"></p>
-    </form>
+                    <div class="field">
+                        <label for="date_retour_prevue">Date de retour prévue</label>
+                        <input type="date" name="date_retour_prevue" id="date_retour_prevue" required>
+                    </div>
 
-
+                    <button type="submit">Enregistrer</button>
+                    <p class="erreur" id="erreur_emprunt"></p>
+                </form>
+            </section>
+        </div>
+    </main>
 
     <script src="./js/stats.js"></script>
     <script src="./js/auteurs.js"></script>

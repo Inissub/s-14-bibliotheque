@@ -42,10 +42,10 @@ async function selectAuteurs() {
 }
 
 async function ajouteLivre() {
-    let formulaire = document.forms['form_livre'];
-    let l_titre = formulaire['titre'].value;
-    let l_anne = formulaire['annee_publication'].value;
-    let l_e_total = formulaire['exemplaires_total'].value;
+    let l_formulaire = document.forms['form_livre'];
+    let l_titre = l_formulaire['titre'].value;
+    let l_anne = l_formulaire['annee_publication'].value;
+    let l_e_total = l_formulaire['exemplaires_total'].value;
     const auteurs = document.getElementById('auteurs');
     let aut_choisi = [];
     for(let el of auteurs.selectedOptions){
@@ -74,7 +74,7 @@ async function ajouteLivre() {
             throw new Error(result.error || `Erreur ${reponse.status}`);
         }
         document.getElementById('erreur_livre').textContent = '';
-        formulaire.reset();
+        l_formulaire.reset();
         document.getElementById('erreur_livre').textContent = 'Livre ajouté avec succès';
         document.getElementById('erreur_livre').style.color = 'green';
         return result;
@@ -110,8 +110,8 @@ async function rechercheLivre(mot_cle) {
     return resultat;
 }
 
-const formulaire= document.getElementById('form_recherche')
-formulaire.addEventListener('submit', async (event) => {
+const re_formulaire= document.getElementById('form_recherche')
+re_formulaire.addEventListener('submit', async (event) => {
     event.preventDefault();
     const mot = document.getElementById('champ_recherche').value.trim();
     if (mot === '') {

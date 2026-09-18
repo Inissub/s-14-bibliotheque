@@ -26,10 +26,10 @@ async function tousAdherents() {
 document.addEventListener('DOMContentLoaded', () =>{tousAdherents()})
 
 async function ajouteAdherent() {
-    let formuliare = document.forms['form_adherent'];
-    const adh_nom = formuliare['nom'].value;
-    const adh_prenom = formuliare['prenom'].value;
-    const adh_contact = formuliare['contact'].value;
+    let adh_formuliare = document.forms['form_adherent'];
+    const adh_nom = adh_formuliare['nom'].value;
+    const adh_prenom = adh_formuliare['prenom'].value;
+    const adh_contact = adh_formuliare['contact'].value;
     if(!adh_nom || adh_nom.trim() === ""){
         throw new Error("le nom est obligatoire");
     }
@@ -55,7 +55,7 @@ async function ajouteAdherent() {
             throw new Error(result.error || `Erreur ${reponse.status}`);
         }
         document.getElementById('erreur_adherent').textContent = '';
-        formuliare.reset();
+        adh_formuliare.reset();
         document.getElementById('erreur_adherent').textContent = 'Adherent ajouté avec succès';
         document.getElementById('erreur_adherent').style.color = 'green';
         return result;
@@ -63,10 +63,13 @@ async function ajouteAdherent() {
         document.getElementById('erreur_adherent').textContent = error.message;
     }
 }
-document.getElementById('form_adherent')?.addEventListener('submit', (event) => {
+const adherent = document.getElementById('form_adherent')
+if(adherent){
+    adherent.addEventListener('submit', (event) => {
     event.preventDefault();
     ajouteAdherent();
 });
+}
 
 async function rechercheAdherents(mot_cle) {
     const reponse = await fetch('http://localhost:3000/adherents');
@@ -88,8 +91,8 @@ async function rechercheAdherents(mot_cle) {
     return resultat;
 }
 
-const formulaire= document.getElementById('form_recherche_adherents')
-formulaire.addEventListener('submit', async (event) => {
+const a_formulaire= document.getElementById('form_recherche_adherents')
+a_formulaire.addEventListener('submit', async (event) => {
     event.preventDefault();
     const mot = document.getElementById('champ_recherche_adherents').value.trim();
     if (mot === '') {

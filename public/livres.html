@@ -3,14 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
+
 </head>
 <body>
-    <form id="form_recherche">
+
+
+    <header class="sidebar">
+        <div class="brand">
+            <span class="brand-logo">
+                <svg viewBox="0 0 24 24" ><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></svg>
+            </span>
+            <span class="brand-name">Biblio</span>
+        </div>
+
+        <nav aria-label="Navigation principale">
+            <ul>
+                <li>
+                    <a href="/" >
+                        <svg viewBox="0 0 24 24" ><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        Accueil
+                    </a>
+                </li>
+                <li>
+                    <a href="./auteurs.html">
+                        <svg viewBox="0 0 24 24" ><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg>
+                        Auteurs
+                    </a>
+                </li>
+                <li>
+                    <a href="./livres.html">
+                        <svg viewBox="0 0 24 24" ><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+                        Livres
+                    </a>
+                </li>
+                <li>
+                    <a href="./adherents.html">
+                        <svg viewBox="0 0 24 24" ><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        Adhérents
+                    </a>
+                </li>
+                <li>
+                    <a href="./emprunts.html">
+                        <svg viewBox="0 0 24 24" ><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
+                        Emprunts
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+<main>
+    <form class=" card form_recherche" id="form_recherche">
         <input type="text" id="champ_recherche" placeholder="Rechercher par titre ou auteur...">
         <button type="submit">Rechercher</button>
     </form>
-    <table id="livres_table">
+    <table class="table" id="livres_table">
         <thead>
             <tr>
                 <th>Titre</th>
@@ -25,6 +75,7 @@
             
         </tbody>
     </table>
+</main>
 
 <script src="./js/livres.js"></script>
 </body>

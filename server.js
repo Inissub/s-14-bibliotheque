@@ -12,9 +12,9 @@ app.use('/adherents', require('./routes/adherents.routes'));
 app.use('/livres', require('./routes/livres.routes'));
 app.use('/emprunts', require('./routes/emprunts.routes'));
 app.use('/statistiques', require('./routes/statistiques.routes'));
-
+app.use(express.static('public'));
 app.get('/', async (req, res) => {
-    res.send('Hello Moto')
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 
