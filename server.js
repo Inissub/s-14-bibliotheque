@@ -1,11 +1,16 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-
+const morgan = require('morgan')
+const fs = require('fs')
+const path = require('path')
 const app = express();
 
+const logstream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 app.use(cors());
 app.use(express.json());
+app.use(morgan('combined', {stream: logstream}))
+
 
 app.use('/auteurs', require('./routes/auteurs.routes'));
 app.use('/adherents', require('./routes/adherents.routes'));
