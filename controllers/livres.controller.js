@@ -1,6 +1,6 @@
 const pool = require('../config/database')
 
-async function tousLivres(req, res){
+async function tousLivres(req, res, next){
     try {
         const result = await pool.query(
             `SELECT l.id,l.titre,l.annee_publication,l.exemplaires_total,l.exemplaires_disponibles,
@@ -13,8 +13,7 @@ async function tousLivres(req, res){
         );
         res.json(result.rows);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({error: "erreur lors de la recuperation des auteurs"});
+        next(error);
     }
 }
 
@@ -47,14 +46,13 @@ async function creerLivre(req, res) {
         res.status(201).json({ success: 'livre créé avec succès', livre });
     } catch (error) {
         await client.query('ROLLBACK');
-        console.error(error);
-        res.status(500).json({ error: 'erreur lors de la création du livre' });
+        next(error);
     } finally {
         client.release();
     }
 }
 
-async function updateLivre(req, res) {
+async function updateLivre(req, res, next) {
     const { id } = req.params;
     const { titre, annee_publication, exemplaires_total, auteurs } = req.body;
     if (!titre || !exemplaires_total) {
@@ -87,14 +85,13 @@ async function updateLivre(req, res) {
         res.status(200).json({ success: 'livre mis à jour avec succès', livre: livreResult.rows[0] });
     } catch (error) {
         await client.query('ROLLBACK');
-        console.error(error);
-        res.status(500).json({ error: 'erreur lors de la mise à jour du livre' });
+        next(error);
     } finally {
         client.release();
     }
 }
 
-async function deleteLivre(req, res) {
+async function deleteLivre(req, res, next) {
     const { id } = req.params;
     try {
         const result = await pool.query('DELETE FROM biblio.livres WHERE id = $1 RETURNING *', [id]);
@@ -106,8 +103,7 @@ async function deleteLivre(req, res) {
         if (error.code === '23503') {
             return res.status(409).json({ error: 'impossible de supprimer ce livre : il a des emprunts associés (passés ou en cours)' });
         }
-        console.error(error);
-        res.status(500).json({ error: 'erreur lors de la suppression du livre' });
+        next(error);
     }
 }
 

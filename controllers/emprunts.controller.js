@@ -2,7 +2,7 @@ const pool = require('../config/database');
 
 
 // enregistremnt d'un nouvel emprunt
-async function creerEmprunt(req, res) {
+async function creerEmprunt(req, res, next) {
     const {adherent_id, livre_id, date_retour_prevue} = req.body;
 
     if(!adherent_id || !livre_id || !date_retour_prevue){
@@ -35,15 +35,14 @@ async function creerEmprunt(req, res) {
         if(error.code === '23505'){
             return res.status(409).json({ error: 'cet adherent a deja un emprunt actif sur ce livre' });
         }
-        console.error(error);
-        res.status(500).json({ error: "erreur lors de la création de l'emprunt" });
+        next(error)
     }finally{
         client.release();
     }
 }
 
 // mise a jour d'un emprunt
-async function updateEmprunt(req, res) {
+async function updateEmprunt(req, res, next) {
     const {id} = req.params;
     const client = await pool.connect();
     try {
@@ -63,15 +62,14 @@ async function updateEmprunt(req, res) {
         res.status(200).json({ success: 'retour enregistré avec succès', emprunt: reslut2.rows[0] });
     } catch (error) {
         await client.query('ROLLBACK');
-        console.error(error);
-        res.status(500).json({ error: "erreur lors de l'enregistrement du retour" });
+        next(error)
     }finally{
         client.release();
     }
 }
 
 // liste des emprunts
-async function tousEmprunts(req, res) {
+async function tousEmprunts(req, res, next) {
     try {
         const result = await pool.query(`SELECT e.id, e.livre_id, l.titre, e.adherent_id, a.nom, a.prenom,
                                             e.date_emprunt, e.date_retour_prevue, e.date_retour_effective,
@@ -86,8 +84,7 @@ async function tousEmprunts(req, res) {
                                             ORDER BY e.date_emprunt DESC`);
         res.json(result.rows);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "erreur lors de la recuperation de la liste" });      
+        next(error);
     }
 }
 

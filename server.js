@@ -7,6 +7,7 @@ const path = require('path')
 const app = express();
 
 const logstream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
+const gestErr = require('./middlewares/gestionErreur');
 app.use(cors());
 app.use(express.json());
 app.use(morgan('combined', {stream: logstream}))
@@ -21,7 +22,7 @@ app.use(express.static('public'));
 app.get('/', async (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
-
+app.use(gestErr);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

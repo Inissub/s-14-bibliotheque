@@ -1,18 +1,17 @@
 const pool = require('../config/database')
 
 // la liste des adherents
-async function tousAdherents(req, res){
+async function tousAdherents(req, res, next){
     try {
         const result = await pool.query('SELECT * FROM biblio.adherents ORDER BY id');
         res.json(result.rows);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({error: "erreur lors de la recuperation des adherents"});
+        next(error);
     }
 }
 
 // ajouter un adherent
-async function newAdherent(req, res) {
+async function newAdherent(req, res, next) {
     const {nom, prenom, contact} = req.body;
     if(!nom || !prenom || !contact){
         return res.status(400).json({error: 'repmlissez tous les champs'})
@@ -21,13 +20,12 @@ async function newAdherent(req, res) {
         const result = await pool.query('INSERT INTO  biblio.adherents(nom, prenom, contact) VALUES ($1,$2,$3) RETURNING *', [nom, prenom, contact]);
         res.status(200).json({success: 'adherent enregistré avec succes', adherent: result.rows[0]});
     } catch (error) {
-        console.error(error);
-        res.status(500).json({error: "erreur lors de l'insertion de cet adherent"});
+        next(error);
     }
 }
 
 //mise a jour de l'adehrent 
-async function updateAdhrent(req, res){
+async function updateAdhrent(req, res, next){
     const {id} = req.params;
     const {nom, prenom, contact} = req.body;
     if(!nom || !prenom || !contact){
@@ -43,13 +41,12 @@ async function updateAdhrent(req, res){
             adherent:result.rows[0]
         })
     } catch (error) {
-        console.error(error);
-        res.status(500).json({error: "erreur lors de la mise à jour de cet adherent"});
+        next(error);
         
     }
 }
 // suppression de l'adherent
-async function deleteAdherent(req, res) {
+async function deleteAdherent(req, res, next) {
     const {id} = req.params;
     try {
         const result = await pool.query('DELETE FROM biblio.adherents WHERE id = $1', [id])
@@ -58,8 +55,7 @@ async function deleteAdherent(req, res) {
         }
         res.status(200).json({success: 'auteur supprimé avec succes'})        
     } catch (error) {
-        console.error(error);
-        res.status(500).json({error: "erreur lors de la supression de cet adherent"});
+        next(error);
     }
 }
 module.exports = {

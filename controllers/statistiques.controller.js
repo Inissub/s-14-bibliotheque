@@ -1,7 +1,7 @@
 const pool = require('../config/database');
 
 
-async function tousStats(req, res) {
+async function tousStats(req, res, next) {
     try {
         const livres_total = await pool.query('SELECT SUM (exemplaires_total) FROM biblio.livres');
         const adherents_total = await pool.query('SELECT COUNT (*) FROM biblio.adherents');
@@ -19,8 +19,7 @@ async function tousStats(req, res) {
             adhrent_plusactif: adherent_plus_actif.rows[0] || null
         })
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "erreur lors de la recuperation des statistques." });   
+        next(error)
     }
 }
 
