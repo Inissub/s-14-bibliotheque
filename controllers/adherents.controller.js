@@ -1,5 +1,6 @@
 const pool = require('../config/database')
 
+// la liste des adherents
 async function tousAdherents(req, res){
     try {
         const result = await pool.query('SELECT * FROM biblio.adherents ORDER BY id');
@@ -10,6 +11,7 @@ async function tousAdherents(req, res){
     }
 }
 
+// ajouter un adherent
 async function newAdherent(req, res) {
     const {nom, prenom, contact} = req.body;
     if(!nom || !prenom || !contact){
@@ -24,6 +26,7 @@ async function newAdherent(req, res) {
     }
 }
 
+//mise a jour de l'adehrent 
 async function updateAdhrent(req, res){
     const {id} = req.params;
     const {nom, prenom, contact} = req.body;
@@ -45,7 +48,7 @@ async function updateAdhrent(req, res){
         
     }
 }
-
+// suppression de l'adherent
 async function deleteAdherent(req, res) {
     const {id} = req.params;
     try {

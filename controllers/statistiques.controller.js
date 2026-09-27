@@ -1,5 +1,6 @@
 const pool = require('../config/database');
 
+
 async function tousStats(req, res) {
     try {
         const livres_total = await pool.query('SELECT SUM (exemplaires_total) FROM biblio.livres');

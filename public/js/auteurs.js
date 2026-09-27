@@ -2,7 +2,7 @@ async function tousAuteurs() {
     let auteurs = document.getElementById('auth_tbody');
     if (!auteurs) return;
     try {
-        const reponse = await fetch('http://localhost:3000/auteurs');
+        const reponse = await fetch(`${API}/auteurs`);
         if(reponse.ok){
             const reponseJson = await reponse.json();
             let auteur = '';
@@ -36,7 +36,7 @@ async function ajoutAuteur() {
         throw new Error("Entrez sa nationnalité");
     }
     try {
-        const reponse = await fetch('http://localhost:3000/auteurs', {
+        const reponse = await fetch(`${API}/auteurs`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body : JSON.stringify({nom: aut_nom, nationalite: aut_nationalite})
@@ -60,7 +60,7 @@ document.getElementById('form_auteur')?.addEventListener('submit', (event) => {
 });
 
 async function rechercheAuteur(mot_cle) {
-    const reponse = await fetch('http://localhost:3000/auteurs');
+    const reponse = await fetch(`${API}/auteurs`);
     const reponseJson = await reponse.json();
     const mini_mot = mot_cle.toLowerCase();
     const resultat = [];

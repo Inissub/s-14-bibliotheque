@@ -2,7 +2,7 @@ async function tousEmprunts() {
     let emprunts = document.getElementById('emp_tbody');
     if (!emprunts) return;
     try {
-        const reponse = await fetch('http://localhost:3000/emprunts');
+        const reponse = await fetch(`${API}/emprunts`);
         if(reponse.ok){
             const reponseJson = await reponse.json();
             let empunt = '';
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () =>{tousEmprunts(), selectAdhere
 async function selectAdherent() {
     const adhr = document.getElementById('adherent_id');
     try {
-        const reponse = await fetch('http://localhost:3000/adherents');
+        const reponse = await fetch(`${API}/adherents`);
         const reponseJson = await reponse.json();
         let options = '';
         for (let el of reponseJson) {
@@ -46,7 +46,7 @@ async function selectAdherent() {
 async function selectLivres() {
     const lvr = document.getElementById('livre_id');
     try {
-        const reponse = await fetch('http://localhost:3000/livres');
+        const reponse = await fetch(`${API}/livres`);
         const reponseJson = await reponse.json();
         const disponibles = reponseJson.filter(l => l.exemplaires_disponibles > 0);
         let options = '';
@@ -75,7 +75,7 @@ async function ajouteEmprunt() {
         throw new Error("sélectionnez un livre");
     }
     try {
-        const reponse = await fetch('http://localhost:3000/emprunts', {
+        const reponse = await fetch(`${API}/emprunts`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body : JSON.stringify({livre_id: lvr_id, adherent_id: adhr_id, date_retour_prevue: date_retour })

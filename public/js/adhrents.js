@@ -3,7 +3,7 @@ async function tousAdherents() {
     let adherents = document.getElementById('adh_tbody');
     if (!adherents) return;
     try {
-        const reponse = await fetch('http://localhost:3000/adherents');
+        const reponse = await fetch(`${API}/adherents`);
         if(reponse.ok){
             const reponseJson = await reponse.json();
             let adherent = ''
@@ -45,7 +45,7 @@ async function ajouteAdherent() {
         }
     }
     try {
-        const reponse = await fetch('http://localhost:3000/adherents/', {
+        const reponse = await fetch(`${API}/adherents/`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body : JSON.stringify({nom: adh_nom, prenom: adh_prenom, contact: adh_contact})
@@ -72,7 +72,7 @@ if(adherent){
 }
 
 async function rechercheAdherents(mot_cle) {
-    const reponse = await fetch('http://localhost:3000/adherents');
+    const reponse = await fetch(`${API}/adherents`);
     const reponseJson = await reponse.json();
     const mini_mot = mot_cle.toLowerCase();
     const resultat = [];

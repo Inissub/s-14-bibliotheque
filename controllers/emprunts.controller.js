@@ -1,5 +1,7 @@
 const pool = require('../config/database');
 
+
+// enregistremnt d'un nouvel emprunt
 async function creerEmprunt(req, res) {
     const {adherent_id, livre_id, date_retour_prevue} = req.body;
 
@@ -19,7 +21,7 @@ async function creerEmprunt(req, res) {
             return res.status(409).json({error: 'Plus aucun emprunt possible pour ce livre'});
         }
         const result2 = await client.query('SELECT COUNT (*) FROM biblio.emprunts WHERE adherent_id=$1 AND date_retour_effective IS NULL', [adherent_id]);
-        if(parseInt(result2.rows[0].count >= 2)){
+        if(parseInt(result2.rows[0].count) >= 2){
             await client.query('ROLLBACK');
             return res.status(409).json({error: "Cet adherent a deja atteint son maximum d'emprunts(2 emprunts maximum)"});           
         }
@@ -40,6 +42,7 @@ async function creerEmprunt(req, res) {
     }
 }
 
+// mise a jour d'un emprunt
 async function updateEmprunt(req, res) {
     const {id} = req.params;
     const client = await pool.connect();
@@ -67,6 +70,7 @@ async function updateEmprunt(req, res) {
     }
 }
 
+// liste des emprunts
 async function tousEmprunts(req, res) {
     try {
         const result = await pool.query(`SELECT e.id, e.livre_id, l.titre, e.adherent_id, a.nom, a.prenom,

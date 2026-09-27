@@ -1,5 +1,7 @@
 const pool = require('../config/database')
 
+
+// recuperer la liste des auteurs
 async function tousAuteurs(req, res){
     try{
         const result = await pool.query('SELECT * FROM biblio.auteurs ORDER BY id ');
@@ -10,6 +12,8 @@ async function tousAuteurs(req, res){
     }
 }
 
+
+// ajouter un auteur
 async function newAuteur(req, res){
     const {nom, nationalite} = req.body;
     if(!nom){
@@ -25,6 +29,8 @@ async function newAuteur(req, res){
     }
 }
 
+
+// mise a jour d'un auteur
 async function updateAuteur(req, res) {
     const {id} = req.params;
     const {nom, nationalite} = req.body;
@@ -43,6 +49,8 @@ async function updateAuteur(req, res) {
     }
 }
 
+
+// supression d'un auteur
 async function deleteAuteur(req, res){
     const {id} = req.params;
     try {

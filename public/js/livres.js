@@ -2,7 +2,7 @@ async function touslivres() {
     let livres  = document.getElementById('livres_tbody');
     if (!livres) return;
     try {
-        const reponse = await fetch('http://localhost:3000/livres');
+        const reponse = await fetch(`${API}/livres`);
         if(reponse.ok){
             const reponsJson = await reponse.json();
             let livre = '';
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () =>{touslivres(), selectAuteurs(
 async function selectAuteurs() {
     const select = document.getElementById('auteurs');
     try {
-        const reponse = await fetch('http://localhost:3000/auteurs');
+        const reponse = await fetch(`${API}/auteurs`);
         const reponseJson = await reponse.json();
         let options = '';
         for (let el of reponseJson) {
@@ -64,7 +64,7 @@ async function ajouteLivre() {
         throw new Error("sélectionnez au moins un auteur");
     }
     try {
-        const reponse = await fetch('http://localhost:3000/livres', {
+        const reponse = await fetch(`${API}/livres`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body : JSON.stringify({titre: l_titre, annee_publication: l_anne, exemplaires_total: l_e_total, auteurs: aut_choisi})
@@ -89,7 +89,7 @@ document.getElementById('form_livre')?.addEventListener('submit', (event) => {
 });
 
 async function rechercheLivre(mot_cle) {
-    const reponse = await fetch('http://localhost:3000/livres');
+    const reponse = await fetch(`${API}/livres`);
     const reponseJson = await reponse.json();
     const mini_mot = mot_cle.toLowerCase();
     const resultat = [];

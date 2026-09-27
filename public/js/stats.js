@@ -1,7 +1,8 @@
+//gere les statistiques
 async function stats(){
     const stat_liste = document.getElementById('stats');
     try{
-        const reponse = await fetch('http://localhost:3000/statistiques');
+        const reponse = await fetch(`${API}/statistiques`);
         if(reponse.ok){
             const responseJson = await reponse.json();
             stat_liste.innerHTML = `
